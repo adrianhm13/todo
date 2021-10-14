@@ -1,19 +1,9 @@
 //Module pattern for handling tasks
 
-import { events } from "./pubsub";
+import { events } from "./pubsub.js";
 
-const handleTasks = (() => {
-    const listTasks = []
-    events.on('taskAdded', addToList)
+class TaskController {
 
-    function addToList(task) {
-        listTasks.push(task)
-        showArray();
-    }
-    function showArray() {
-        console.log(listTasks);
-    }
+}
 
-})();
-
-export {handleTasks}
+export {TaskController}
