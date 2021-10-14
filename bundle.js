@@ -120,13 +120,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/create-project.js":
+/*!*******************************!*\
+  !*** ./src/create-project.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\n/* harmony import */ var _create_task_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-task.js */ \"./src/create-task.js\");\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n/* harmony import */ var _handler_project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./handler-project.js */ \"./src/handler-project.js\");\n\n\n\n\nclass Project {\n    constructor(name) {\n        this.projectName = name\n        this.listTasks = [];\n        _handler_project_js__WEBPACK_IMPORTED_MODULE_2__.projectController.addProject(this);\n    }\n    createTask(title, description, dueDate, priority, project){\n        let task = new _create_task_js__WEBPACK_IMPORTED_MODULE_0__.addTask(title, description, dueDate, priority, project)\n        this.listTasks.push(task);\n    }\n    set changeProjectName(newName){\n        this.projectName = newName;\n    }\n    get nameProject(){\n        return this.projectName;\n    }\n    get infoProject(){\n        console.log(`The project it's: ${this.nameProject}, with the quantity of: ${this.listTasks.length}, tasks`)\n    }\n}\n\n\n\n//# sourceURL=webpack://Class/./src/create-project.js?");
+
+/***/ }),
+
 /***/ "./src/create-task.js":
 /*!****************************!*\
   !*** ./src/create-task.js ***!
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTask\": () => (/* binding */ addTask)\n/* harmony export */ });\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n\n\nclass addTask {\n    constructor(title, description, dueDate, priority, project){\n        this.title = title;\n        this.description = description;\n        this.dueDate = dueDate;\n        this.priority = priority;\n        this.project = project;\n    }\n    get infoTask() {\n        console.log(`${this.title} it's a task with the description: ${this.description} with a due date of: ${this.dueDate}, with a ${this.priority} and belongs to this ${this.project}.`)\n        this.pushToList();\n    }\n    pushToList() {\n        _pubsub_js__WEBPACK_IMPORTED_MODULE_0__.events.emit('taskAdded', this)\n    }\n}\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://Class/./src/create-task.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"addTask\": () => (/* binding */ addTask)\n/* harmony export */ });\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n\n\nclass addTask {\n    constructor(title, description, dueDate, priority){\n        this.title = title;\n        this.description = description;\n        this.dueDate = dueDate;\n        this.priority = priority;\n    }\n    get infoTask() {\n        console.log(`${this.title} it's a task with the description: ${this.description} with a due date of: ${this.dueDate}, with a ${this.priority}`)\n    }\n}\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://Class/./src/create-task.js?");
+
+/***/ }),
+
+/***/ "./src/handler-project.js":
+/*!********************************!*\
+  !*** ./src/handler-project.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectController\": () => (/* binding */ projectController)\n/* harmony export */ });\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n/* harmony import */ var _create_project_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-project.js */ \"./src/create-project.js\");\n\n\n\n//Class to handle projects\n\nclass ProjectController {\n    constructor() {\n        this.projectList = []\n    }\n\n    addProject = (Project) => {\n        console.log(\"Project added to controller\")\n        this.projectList.push(Project)\n        console.log(this.projectList);\n    }\n}\n\nconst projectController = new ProjectController\n\n\n\n//# sourceURL=webpack://Class/./src/handler-project.js?");
 
 /***/ }),
 
@@ -136,7 +156,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"handleTasks\": () => (/* binding */ handleTasks)\n/* harmony export */ });\n/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pubsub */ \"./src/pubsub.js\");\n//Module pattern for handling tasks\n\n\n\nconst handleTasks = (() => {\n    const listTasks = []\n    _pubsub__WEBPACK_IMPORTED_MODULE_0__.events.on('taskAdded', addToList)\n    console.log('alal')\n    function addToList(task) {\n        listTasks.push(task)\n        showArray();\n    }\n    function showArray() {\n        console.log(listTasks);\n    }\n\n})();\n\n\n\n//# sourceURL=webpack://Class/./src/handler-task.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"TaskController\": () => (/* binding */ TaskController)\n/* harmony export */ });\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n//Module pattern for handling tasks\n\n\n\nclass TaskController {\n\n}\n\n\n\n//# sourceURL=webpack://Class/./src/handler-task.js?");
 
 /***/ }),
 
@@ -146,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _create_task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-task.js */ \"./src/create-task.js\");\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n/* harmony import */ var _handler_task_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./handler-task.js */ \"./src/handler-task.js\");\n\n\n\n\n\nlet task1 = new _create_task_js__WEBPACK_IMPORTED_MODULE_1__.addTask('Arreglar ropa', 'Poner ropa en el armario y colocarla', 'Hoy', 'Alta', 'Cosas del hogar')\n\ntask1.infoTask;\n\n//# sourceURL=webpack://Class/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _create_task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-task.js */ \"./src/create-task.js\");\n/* harmony import */ var _create_project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-project.js */ \"./src/create-project.js\");\n/* harmony import */ var _pubsub_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pubsub.js */ \"./src/pubsub.js\");\n/* harmony import */ var _handler_task_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./handler-task.js */ \"./src/handler-task.js\");\n/* harmony import */ var _handler_project_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./handler-project.js */ \"./src/handler-project.js\");\n\n\n\n\n\n\n\nwindow.addTask = _create_task_js__WEBPACK_IMPORTED_MODULE_1__.addTask;\nwindow.Project = _create_project_js__WEBPACK_IMPORTED_MODULE_2__.Project;\nwindow.ProjectController = _handler_project_js__WEBPACK_IMPORTED_MODULE_5__.ProjectController;\nwindow.events = _pubsub_js__WEBPACK_IMPORTED_MODULE_3__.events;\nlet task1 = new _create_task_js__WEBPACK_IMPORTED_MODULE_1__.addTask('Arreglar ropa', 'Poner ropa en el armario y colocarla', 'Hoy', 'Alta', 'Cosas del hogar')\n\ntask1.infoTask;\n\n//# sourceURL=webpack://Class/./src/index.js?");
 
 /***/ }),
 
