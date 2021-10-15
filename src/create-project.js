@@ -1,5 +1,4 @@
 import {addTask} from './create-task.js';
-import { events } from './pubsub.js';
 import {projectController} from './handler-project.js';
 
 class Project {
@@ -7,6 +6,7 @@ class Project {
         this.projectName = name
         this.listTasks = [];
         projectController.addProject(this);
+        console.log(this.infoProject)
     }
     createTask(title, description, dueDate, priority, project){
         let task = new addTask(title, description, dueDate, priority, project)

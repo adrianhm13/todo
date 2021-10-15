@@ -1,6 +1,46 @@
 *, ::after, ::before {
     box-sizing: border-box;
 }
-html, body{
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+}
+.content{
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    min-width: 100vh;
+}
+.left-nav{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 100vh;
+    background-color: green;
+    justify-content: center;
+    align-items: center;
+}
+.tasks-content{
+    width: 85%;
+    height: 100vh;
+    background-color: yellow;
+}
+.projects-container{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+.add-projects{
+    display: flex;
+    flex-direction: column;
+}
+.list-projects{
+    display:flex;
+    flex-direction: column;
+}
+.project{
     background-color: red;
 }
