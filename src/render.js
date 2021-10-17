@@ -32,7 +32,7 @@ class Render{
     static getInfoNewProject(){
         const inputNameProject = document.getElementById('inputNameProject');
         const nameProject = inputNameProject.value
-        inputNameProject.value = "";
+        inputNameProject.value = "New project's name";
         
         if (Render.checkDuplicateNameProject(nameProject) == true || nameProject == false){
             alert("This name it's being used, or it's empty");
@@ -52,13 +52,24 @@ class Render{
 
         this.projectsDOM.appendChild(projectDiv);
 
-        this.populateSingleProject(projectDiv, i)
+        projectDiv.addEventListener('click', () => {this.populateSingleProjectContent(i)})
+
+        this.populateSingleProjectNav(projectDiv, i);
     }
-    static populateSingleProject(projectDiv, i){
+    static populateSingleProjectNav(projectDiv, i){
         const projectList = this.projectList
         
-        const titleProject = document.createElement('h3');
+        const titleProject = document.createElement('h4');
         titleProject.innerHTML = projectList[i].projectName;
+
+        const divButtons = document.createElement('div');
+        divButtons.classList.add('buttons-project');
+
+        const circleTasks = document.createElement('div');
+        circleTasks.classList.add('circle-task')
+
+        const numberCircleTasks = document.createElement('p');
+        numberCircleTasks.textContent = projectList[i].listTasks.length
 
         const deleteProject = document.createElement('span')
         deleteProject.setAttribute('class', 'fas fa-trash')
@@ -66,7 +77,18 @@ class Render{
 
 
         projectDiv.appendChild(titleProject);
-        projectDiv.appendChild(deleteProject)
+        projectDiv.appendChild(divButtons);
+        divButtons.appendChild(circleTasks);
+        circleTasks.appendChild(numberCircleTasks);
+        divButtons.appendChild(deleteProject);
+    }
+    static populateSingleProjectContent(i) {
+        const mainDivTask = document.getElementById('tasks-content');
+        const taskContent = document.createElement('div');
+        taskContent.classList.add('task-content')
+
+        mainDivTask.appendChild(taskContent);
+        alert(`The index of the project its: ${i}`)
     }
 }
 

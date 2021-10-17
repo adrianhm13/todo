@@ -21,47 +21,150 @@ html, body {
     flex-direction: column;
     width: 15%;
     height: 100vh;
-    background-color: green;
+    background-color: #ffffff;
     justify-content: center;
     align-items: center;
+    z-index: 1;
+    box-shadow: 2px 0 30px -4px rgba(10, 10, 10, 0.3);
 }
-.tasks-content{
-    width: 85%;
-    height: 100vh;
-    background-color: yellow;
+.left-nav h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    cursor: default;
+    margin: 10px;
 }
+.left-nav .input-text{
+    color: black;
+}
+  
+.h-divider-shadow {
+    width: 100%;
+    overflow: hidden;
+    height: 20px;
+  }
+  
+.h-divider-shadow:after {
+    content: '';
+    display: block;
+    margin: -25px auto 0;
+    width: 100%;
+    height: 25px;
+    border-radius: 125px/12px;
+    box-shadow: 0 0 3px rgb(99, 99, 99);
+  }
 .projects-container{
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .add-projects{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 10px;
+}
+.add-projects .input-text{
+    width: 70%;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color:rgb(151, 151, 151);
+    resize: none;
+    border: 1px solid rgb(209, 209, 209)
+}
+.add-projects .input-text:hover{
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid rgb(136, 136, 136);
+}
+.add-projects .input-text:focus{
+    outline: none;
+    border: 1px solid rgb(34, 34, 34);
+}
+.left-nav .projects-container .add-projects span{
+    cursor: pointer;
+    font-size: 30px;
+    color: #118ab2;
+    transition-duration: 0.8s;
+}
+.left-nav .projects-container .add-projects span:hover{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    color: #0b5770;
 }
 .list-projects{
+    margin-top: 20px;
     display:flex;
     flex-direction: column;
     width: 100%;
 }
 .project{
+    padding-right: 20px;
+    padding-left: 20px;
+    height: 50px;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: red;
     justify-content: space-between;
     align-items: center;
+    transition: 0.5s;
 }
-.project h3{
+.project:hover{
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+.project h4{
     font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+    font-weight: 300;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0;
 }
+.project .buttons-project{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.circle-task {
+    height: 20px;
+    width: 20px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.circle-task p {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 20px;
+    margin: 0;
+}
 .project span{
+    cursor: pointer;
     height: 25px;
     line-height: 25px;
-    color: white;
-    margin-right: 20px;
+    color: #c9184a;
+    transition-duration: 0.2s;
+}
+.project span:hover{
+    color: #a1153d;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+.right-content {
+    width: 100%;
+    height: 100vh;
+}
+.task-content{
+    width: 100%;
+    height: 100vh;
+    background-color: yellow;
 }
