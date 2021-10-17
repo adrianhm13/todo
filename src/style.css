@@ -21,8 +21,8 @@ html, body {
     flex-direction: column;
     width: 15%;
     height: 100vh;
-    background-color: #ffffff;
-    justify-content: center;
+    background-color: #232B32;
+    justify-content: space-evenly;
     align-items: center;
     z-index: 1;
     box-shadow: 2px 0 30px -4px rgba(10, 10, 10, 0.3);
@@ -33,6 +33,7 @@ html, body {
     font-size: 25px;
     cursor: default;
     margin: 10px;
+    color: white;
 }
 .left-nav .input-text{
     color: black;
@@ -53,6 +54,9 @@ html, body {
     border-radius: 125px/12px;
     box-shadow: 0 0 3px rgb(99, 99, 99);
   }
+.task-calendar{
+    height: 50%;
+}
 .projects-container{
     display: flex;
     flex-direction:column;
@@ -66,6 +70,7 @@ html, body {
     justify-content: center;
     align-items: center;
     gap: 25px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .add-projects .input-text{
@@ -88,19 +93,19 @@ html, body {
 .left-nav .projects-container .add-projects span{
     cursor: pointer;
     font-size: 30px;
-    color: #118ab2;
+    color: #f3722c;
     transition-duration: 0.8s;
 }
 .left-nav .projects-container .add-projects span:hover{
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
-    color: #0b5770;
+    color: #ac5221;
 }
 .list-projects{
     margin-top: 20px;
-    display:flex;
-    flex-direction: column;
+    height: 70%;
     width: 100%;
+    overflow-y:auto;
 }
 .project{
     padding-right: 20px;
@@ -117,12 +122,18 @@ html, body {
     background-color: #e9ecef;
     cursor: pointer;
 }
+
 .project h4{
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0;
+    color: white;
+    transition: 0.5s;
+}
+.project:hover h4{
+    color: black;
 }
 .project .buttons-project{
     display: flex;
@@ -147,24 +158,59 @@ html, body {
     line-height: 20px;
     margin: 0;
 }
-.project span{
+.project .delete-project{
     cursor: pointer;
     height: 25px;
     line-height: 25px;
     color: #c9184a;
     transition-duration: 0.2s;
 }
-.project span:hover{
+.project .delete-project:hover{
     color: #a1153d;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+.project .add-task{
+    cursor: pointer;
+    height: 25px;
+    line-height: 25px;
+    color: #1ec918;
+    transition-duration: 0.2s;
+}
+.project .add-task:hover{
+    color: #1b740f;
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
 }
 .right-content {
     width: 100%;
     height: 100vh;
+    background-color: #495867;
 }
 .task-content{
     width: 100%;
     height: 100vh;
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+}
+.task-title {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+.task-title h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: whitesmoke;
+}
+.task-title span {
+
+}
+.rounded{
+    border-style: none;
+    width: 100%;
+    border-top: 1px solid rgb(235, 235, 235);
 }

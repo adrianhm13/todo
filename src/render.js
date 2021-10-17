@@ -13,6 +13,8 @@ class Render{
         }
     }
     static clearProjectsDOM(){
+        const titleProject = document.getElementById('title-project-task');
+        titleProject.textContent = "Keep your tasks organized!"
         this.projectsDOM.innerHTML = "";
     }
     static get projectsDOM(){
@@ -74,21 +76,27 @@ class Render{
         const deleteProject = document.createElement('span')
         deleteProject.setAttribute('class', 'fas fa-trash')
         deleteProject.addEventListener('click', () => {projectController.removeProject(i)})
+        deleteProject.classList.add('delete-project')
 
+        const addTask = document.createElement('span');
+        addTask.addEventListener('click', () => {addTaskClicked(i)})
+        addTask.setAttribute('class', "fas fa-plus");
+        addTask.classList.add('add-task')
 
         projectDiv.appendChild(titleProject);
         projectDiv.appendChild(divButtons);
         divButtons.appendChild(circleTasks);
         circleTasks.appendChild(numberCircleTasks);
+        divButtons.appendChild(addTask)
         divButtons.appendChild(deleteProject);
     }
     static populateSingleProjectContent(i) {
-        const mainDivTask = document.getElementById('tasks-content');
-        const taskContent = document.createElement('div');
-        taskContent.classList.add('task-content')
-
-        mainDivTask.appendChild(taskContent);
+        const titleProject = document.getElementById('title-project-task');
+        titleProject.textContent = this.projectList[i].nameProject
         alert(`The index of the project its: ${i}`)
+    }
+    static addTaskClicked(i){
+        this.populateSingleProjectContent(i)
     }
 }
 

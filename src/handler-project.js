@@ -16,6 +16,7 @@ class ProjectController {
         console.log(`"Array with all the projects: " + ${JSON.stringify(this.projectList)}`);
     }
     removeProject = (id) => {
+        event.stopPropagation();
         console.log("Removing project");
         this.projectList.splice(id, 1);
         Render.renderProjects();
