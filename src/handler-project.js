@@ -12,6 +12,7 @@ class ProjectController {
     addProject = (Project) => {
         console.log("Project added to controller")
         this.projectList.push(Project)
+        Render.renderProjects();
         console.log(`"Array with all the projects: " + ${JSON.stringify(this.projectList)}`);
     }
     removeProject = (id) => {

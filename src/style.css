@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
 *, ::after, ::before {
     box-sizing: border-box;
 }
@@ -40,7 +43,25 @@ html, body {
 .list-projects{
     display:flex;
     flex-direction: column;
+    width: 100%;
 }
 .project{
+    display: flex;
+    flex-direction: row;
     background-color: red;
+    justify-content: space-between;
+    align-items: center;
+}
+.project h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+}
+.project span{
+    height: 25px;
+    line-height: 25px;
+    color: white;
+    margin-right: 20px;
 }
