@@ -1,5 +1,6 @@
 import {addTask} from './create-task.js';
 import {projectController} from './handler-project.js';
+import { Render } from './render.js';
 
 class Project {
     constructor(name) {
@@ -17,6 +18,7 @@ class Project {
     }
     set changeProjectName(newName){
         this.projectName = newName;
+        Render.renderProjects();
     }
     get nameProject(){
         return this.projectName;

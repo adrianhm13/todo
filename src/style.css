@@ -22,8 +22,8 @@ html, body {
     width: 15%;
     height: 100vh;
     background-color: #232B32;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
+    align-items: stretch;
     z-index: 1;
     box-shadow: 2px 0 30px -4px rgba(10, 10, 10, 0.3);
 }
@@ -55,14 +55,16 @@ html, body {
     box-shadow: 0 0 3px rgb(99, 99, 99);
   }
 .task-calendar{
-    height: 50%;
+    display: flex;
 }
 .projects-container{
     display: flex;
+    flex-grow: 1;
     flex-direction:column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    max-height: 50%;
 }
 .add-projects{
     display: flex;
@@ -108,8 +110,8 @@ html, body {
     overflow-y:auto;
 }
 .project{
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
     height: 50px;
     width: 100%;
     display: flex;
@@ -124,10 +126,10 @@ html, body {
 }
 
 .project h4{
+    font-size: 15px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    padding-left: 10px;
-    padding-right: 10px;
+
     margin: 0;
     color: white;
     transition: 0.5s;
@@ -140,11 +142,11 @@ html, body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 .circle-task {
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    width: 25px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -155,12 +157,12 @@ html, body {
     font-size: 12px;
     font-weight: 500;
     text-align: center;
-    line-height: 20px;
+    line-height: 25px;
     margin: 0;
 }
 .project .delete-project{
     cursor: pointer;
-    height: 25px;
+    height: 20px;
     line-height: 25px;
     color: #c9184a;
     transition-duration: 0.2s;
@@ -172,13 +174,25 @@ html, body {
 }
 .project .add-task{
     cursor: pointer;
-    height: 25px;
+    height: 20px;
     line-height: 25px;
     color: #1ec918;
     transition-duration: 0.2s;
 }
 .project .add-task:hover{
     color: #1b740f;
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+.project .edit-project-btn{
+    cursor: pointer;
+    height: 20px;
+    line-height: 25px;
+    color: #575757;
+    transition-duration: 0.2s;
+}
+.project .edit-project-btn:hover{
+    color: #646464;
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
 }
@@ -213,4 +227,77 @@ html, body {
     border-style: none;
     width: 100%;
     border-top: 1px solid rgb(235, 235, 235);
+}
+ /* The Modal (background) */
+ .modal-edit-project-name {
+    transition: opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-edit-project-name-content {
+    background-color: #3d3d3d;
+    margin: 25% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+.close:hover,
+.close:focus {
+    color: rgb(32, 32, 32);
+    text-decoration: none;
+    cursor: pointer;
+  } 
+/*Submit button for renaming project*/
+.submit-rename-project{
+    color: rgb(29, 158, 29);
+    font-size: 25px;
+    transition: 0.3s;
+} 
+.submit-rename-project:hover,
+.submit-rename-project:focus {
+    color:rgb(24, 131, 24);
+    cursor: pointer;
+}
+/*Input for rename project */
+.modal-edit-project-name-content input{
+    width: 70%;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color:rgb(151, 151, 151);
+    resize: none;
+    border: 1px solid rgb(209, 209, 209)
+}
+.modal-edit-project-name-content input:hover{
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid rgb(136, 136, 136);
+}
+.modal-edit-project-name-content input:focus{
+    outline: none;
+    border: 1px solid rgb(34, 34, 34);
 }
