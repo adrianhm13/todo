@@ -10,6 +10,10 @@ export class addTask {
     get infoTask() {
         console.log(`${this.title} it's a task with the description: ${this.description} with a due date of: ${this.dueDate}, with a ${this.priority}`)
     }
+    get infoDescription() {
+        const desc = this.description;
+        return desc;
+    }
     set changeTitle(newTitle) {
         this.title = newTitle;
     }

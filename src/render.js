@@ -1,5 +1,6 @@
 import { Project } from "./create-project";
 import { projectController } from "./handler-project";
+import {TaskController} from "./handler-task";
 
 class Render {
     static renderProjects() {
@@ -11,6 +12,9 @@ class Render {
         for (let i = 0; i < projectList.length; i++) {
             this.populateListProject(i);
         }
+    }
+    static renderTasks(i){
+        this.populateSingleProjectContent(i);
     }
     static clearProjectsDOM() {
         const titleProject = document.getElementById('title-project-task');
@@ -84,12 +88,11 @@ class Render {
         addTask.classList.add('add-task')
 
         const editProjectBtn = document.createElement('span');
-        // editProject.addEventListener('click', () => { this.showPopupEditProjecName(i) })
         editProjectBtn.setAttribute('class', "fas fa-pen")
         editProjectBtn.classList.add('edit-project-btn');
         editProjectBtn.id = "edit-project-btn"
 
-        this.createModalEditProjectName(editProjectBtn, i);
+        this.createModalEditProjectName(editProjectBtn, i); //Create only one modal, add the id of the project to the button, when the button its clicked, fetch the id and edit that project
 
         projectDiv.appendChild(titleProject);
         projectDiv.appendChild(divButtons);
@@ -99,20 +102,35 @@ class Render {
         divButtons.appendChild(editProjectBtn);
         divButtons.appendChild(deleteProject);
     }
-    static populateSingleProjectContent(i) {
-        const titleProject = document.getElementById('title-project-task');
-        titleProject.textContent = this.projectList[i].nameProject
-        alert(`The index of the project its: ${i}`)
-    }
     static addTaskClicked(i) {
         this.populateSingleProjectContent(i)
     }
-    static showPopupEditProjecName(i) {
+    static populateSingleProjectContent(i) {
+        const divMainListTasks = document.getElementById('populate-list-task');
 
+        const titleProject = document.getElementById('title-project-task');
+        titleProject.textContent = this.projectList[i].nameProject
+
+        const checkShowListTasks = document.getElementById('show-list-tasks'); //Look if there it's an instance, if so, delete and get ready to populate again
+        if(checkShowListTasks != undefined){
+            checkShowListTasks.remove();
+        }
+        const showListTasks = document.createElement('div');
+        showListTasks.id = "show-list-tasks";
+        showListTasks.classList.add('grid-list-tasks');
+
+        divMainListTasks.appendChild(showListTasks);
+        TaskController.createTaskTemplate(showListTasks, i)
+
+        const tasksProject = projectController.projectList[i].listTasks
+        for (let j = 0; j < tasksProject.length; j++) {
+            TaskController.taskContentTemplate(i, j);
+        }
+
+        alert(`The index of the project its: ${i}`)
+    }
+    static showPopupEditProjecName(i) {
         this.createModalEditProjectName()
- 
-        // alert('huh');
-        // projectController.projectList[i].changeProjectName = "Prueba";
     }
     static createModalEditProjectName(editProjectBtn, i) {
 

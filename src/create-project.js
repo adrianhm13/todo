@@ -14,7 +14,6 @@ class Project {
         console.log("ahae")
         let task = new addTask(title, description, dueDate, priority, project)
         this.listTasks.push(task);
-        Render.renderProjects();
     }
     set changeProjectName(newName){
         this.projectName = newName;

@@ -301,3 +301,62 @@ html, body {
     outline: none;
     border: 1px solid rgb(34, 34, 34);
 }
+
+/*List tasks classes (being populated) */
+
+.grid-list-tasks{
+    display: grid;
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    grid-template-columns: repeat(6, minmax(calc(16% - 1rem), 1fr));
+    gap: 1em;
+}
+.grid-list-tasks-child{
+    background-color: rgba(0, 0, 0, 0.212);
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+}
+.grid-list-tasks-content{
+    flex-grow: 1;
+}
+.grid-list-tasks-child h3{
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+}
+.grid-list-tasks-child input,textarea{
+    width: 95%;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color:rgb(151, 151, 151);
+    resize: none;
+    border: 1px solid rgb(209, 209, 209)
+}
+.grid-list-tasks-child input:hover,textarea:hover{
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid rgb(136, 136, 136);
+}
+.grid-list-tasks-child input:focus,textarea:focus{
+    outline: none;
+    border: 1px solid rgb(34, 34, 34);
+}
+.grid-list-tasks-child span{
+    margin-top: 10px;
+    cursor: pointer;
+    color: whitesmoke;
+    font-size: 25px;
+    transition: 0.5s;
+}
+.grid-list-tasks-child span:hover{
+    color: rgb(173, 173, 173);
+}
