@@ -88,11 +88,12 @@ class Render {
         addTask.classList.add('add-task')
 
         const editProjectBtn = document.createElement('span');
+        editProjectBtn.id = i
+        editProjectBtn.addEventListener('click', () => {this.createModalEditProjectName(editProjectBtn, i)})
         editProjectBtn.setAttribute('class', "fas fa-pen")
         editProjectBtn.classList.add('edit-project-btn');
-        editProjectBtn.id = "edit-project-btn"
 
-        this.createModalEditProjectName(editProjectBtn, i); //Create only one modal, add the id of the project to the button, when the button its clicked, fetch the id and edit that project
+
 
         projectDiv.appendChild(titleProject);
         projectDiv.appendChild(divButtons);
@@ -133,40 +134,47 @@ class Render {
     }
     static createModalEditProjectName(editProjectBtn, i) {
 
-        const content = document.getElementById('content')
-        const modal = document.createElement('div');
-        modal.id = "modal-rename-project"
-        modal.classList.add('modal-edit-project-name');
+        // const content = document.getElementById('content')
+        // const modal = document.createElement('div');
+        // modal.id = "modal-rename-project"
+        // modal.classList.add('modal-edit-project-name');
 
-        const modalContent = document.createElement('div')
-        modalContent.classList.add('modal-edit-project-name-content');
+        // const modalContent = document.createElement('div')
+        // modalContent.classList.add('modal-edit-project-name-content');
 
 
-        const closeModal = document.createElement('span');
-        closeModal.classList.add('close');
-        closeModal.innerHTML = "&times;"
+        // const closeModal = document.createElement('span');
+        // closeModal.classList.add('close');
+        // closeModal.innerHTML = "&times;"
 
-        //Input for renaming the project
-        const inputRenameProject = document.createElement('input');
-        inputRenameProject.type = "text";
+        // //Input for renaming the project
+        // const inputRenameProject = document.createElement('input');
+        // inputRenameProject.type = "text";
+        // inputRenameProject.value = projectController.projectList[i].projectName;
+        // inputRenameProject.onclick = function() {this.select()};
+
+        // const submitRename = document.createElement('span');
+        // submitRename.setAttribute('class', 'fas fa-check');
+        // submitRename.classList.add('submit-rename-project');
+
+        // content.appendChild(modal);
+        // modal.appendChild(modalContent);
+        // modalContent.appendChild(closeModal);
+        // modalContent.appendChild(inputRenameProject);
+        // modalContent.appendChild(submitRename);
+        const modal = document.getElementById('modal-rename-project')
+        event.stopPropagation();
+        modal.style.visibility = "visible";
+        modal.style.opacity = "1";
+
+        const closeModal = document.getElementById('close-modal')
+        const inputRenameProject = document.getElementById('input-rename-project');
+        const submitRename = document.getElementById('submit-rename-project')
+
         inputRenameProject.value = projectController.projectList[i].projectName;
-        inputRenameProject.onclick = function() {this.select()};
-
-        const submitRename = document.createElement('span');
-        submitRename.setAttribute('class', 'fas fa-check');
-        submitRename.classList.add('submit-rename-project');
-
-        content.appendChild(modal);
-        modal.appendChild(modalContent);
-        modalContent.appendChild(closeModal);
-        modalContent.appendChild(inputRenameProject);
-        modalContent.appendChild(submitRename);
-
         // When the user clicks on the button, open the modal
         editProjectBtn.onclick = function () {
-            event.stopPropagation();
-            modal.style.visibility = "visible";
-            modal.style.opacity = "1";
+
         }
 
         // When the user clicks on <span> (x), close the modal
@@ -184,8 +192,11 @@ class Render {
                 modal.style.visibility = "hidden";
                 modal.style.opacity = "0";
                 projectController.projectList[i].changeProjectName = nameProject;
-                setTimeout(Render.deleteModalRenameProject, 500, modal)
             }
+        }
+        //When user click input, autoselect text
+        inputRenameProject.onclick = function () {
+            this.select();
         }
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
@@ -194,9 +205,6 @@ class Render {
                 modal.style.opacity = "0";
             }
         }
-    }
-    static deleteModalRenameProject(modal){
-        modal.remove();
     }
 }
 
