@@ -83,7 +83,7 @@ class Render {
         deleteProject.classList.add('delete-project')
 
         const addTask = document.createElement('span');
-        addTask.addEventListener('click', () => { addTaskClicked(i) })
+        addTask.addEventListener('click', () => { this.addTaskClicked(i) })
         addTask.setAttribute('class', "fas fa-plus");
         addTask.classList.add('add-task')
 
@@ -103,6 +103,7 @@ class Render {
         divButtons.appendChild(deleteProject);
     }
     static addTaskClicked(i) {
+        event.stopPropagation();
         this.populateSingleProjectContent(i)
     }
     static populateSingleProjectContent(i) {
@@ -126,8 +127,6 @@ class Render {
         for (let j = 0; j < tasksProject.length; j++) {
             TaskController.taskContentTemplate(i, j);
         }
-
-        alert(`The index of the project its: ${i}`)
     }
     static showPopupEditProjecName(i) {
         this.createModalEditProjectName()
@@ -197,7 +196,6 @@ class Render {
         }
     }
     static deleteModalRenameProject(modal){
-        console.log("hahaha")
         modal.remove();
     }
 }
