@@ -1,6 +1,6 @@
 import { Project } from "./create-project";
 import { projectController } from "./handler-project";
-import {TaskController} from "./handler-task";
+import { TaskController } from "./handler-task";
 
 class Render {
     static renderProjects() {
@@ -13,13 +13,22 @@ class Render {
             this.populateListProject(i);
         }
     }
-    static renderTasks(i){
+    static renderTasks(i) {
         this.populateSingleProjectContent(i);
     }
     static clearProjectsDOM() {
         const titleProject = document.getElementById('title-project-task');
-        titleProject.textContent = "Keep your tasks organized!"
         this.projectsDOM.innerHTML = "";
+    }
+    static clearProjectNameTitle(){
+        const titleProject = document.getElementById('title-project-task')
+        titleProject.textContent = "";
+    }
+    static clearTasksDom() {
+        const listTasks = document.getElementById('show-list-tasks'); //Look if there it's an instance, if so, delete and get ready to populate again
+        if (listTasks != undefined) {
+            listTasks.remove();
+        }
     }
     static get projectsDOM() {
         const divProjects = document.getElementById('listProjects')
@@ -82,14 +91,9 @@ class Render {
         deleteProject.addEventListener('click', () => { projectController.removeProject(i) })
         deleteProject.classList.add('delete-project')
 
-        const addTask = document.createElement('span');
-        addTask.addEventListener('click', () => { this.addTaskClicked(i) })
-        addTask.setAttribute('class', "fas fa-plus");
-        addTask.classList.add('add-task')
-
         const editProjectBtn = document.createElement('span');
         editProjectBtn.id = i
-        editProjectBtn.addEventListener('click', () => {this.createModalEditProjectName(editProjectBtn, i)})
+        editProjectBtn.addEventListener('click', () => { this.createModalEditProjectName(editProjectBtn, i) })
         editProjectBtn.setAttribute('class', "fas fa-pen")
         editProjectBtn.classList.add('edit-project-btn');
 
@@ -99,13 +103,14 @@ class Render {
         projectDiv.appendChild(divButtons);
         divButtons.appendChild(circleTasks);
         circleTasks.appendChild(numberCircleTasks);
-        divButtons.appendChild(addTask)
         divButtons.appendChild(editProjectBtn);
         divButtons.appendChild(deleteProject);
     }
-    static addTaskClicked(i) {
-        event.stopPropagation();
-        this.populateSingleProjectContent(i)
+    static addTaskClicked(showListTasks, i) {
+        this.showTaskCreator(showListTasks, i);
+    }
+    static showTaskCreator(showListTasks, i) {
+        TaskController.createTaskTemplate(showListTasks, i);
     }
     static populateSingleProjectContent(i) {
         const divMainListTasks = document.getElementById('populate-list-task');
@@ -113,16 +118,14 @@ class Render {
         const titleProject = document.getElementById('title-project-task');
         titleProject.textContent = this.projectList[i].nameProject
 
-        const checkShowListTasks = document.getElementById('show-list-tasks'); //Look if there it's an instance, if so, delete and get ready to populate again
-        if(checkShowListTasks != undefined){
-            checkShowListTasks.remove();
-        }
+        this.clearTasksDom()//Look if there it's an instance, if so, delete and get ready to populate again
+
         const showListTasks = document.createElement('div');
         showListTasks.id = "show-list-tasks";
-        showListTasks.classList.add('grid-list-tasks');
+        showListTasks.classList.add('list-tasks');
 
         divMainListTasks.appendChild(showListTasks);
-        TaskController.createTaskTemplate(showListTasks, i)
+        TaskController.createTaskDiv(showListTasks, i)
 
         const tasksProject = projectController.projectList[i].listTasks
         for (let j = 0; j < tasksProject.length; j++) {
@@ -132,36 +135,11 @@ class Render {
     static showPopupEditProjecName(i) {
         this.createModalEditProjectName()
     }
+    static changeProjectNameDom(nameProject){
+        const titleProjectDom = document.getElementById('title-project-task');
+        titleProjectDom.textContent = nameProject;
+    }
     static createModalEditProjectName(editProjectBtn, i) {
-
-        // const content = document.getElementById('content')
-        // const modal = document.createElement('div');
-        // modal.id = "modal-rename-project"
-        // modal.classList.add('modal-edit-project-name');
-
-        // const modalContent = document.createElement('div')
-        // modalContent.classList.add('modal-edit-project-name-content');
-
-
-        // const closeModal = document.createElement('span');
-        // closeModal.classList.add('close');
-        // closeModal.innerHTML = "&times;"
-
-        // //Input for renaming the project
-        // const inputRenameProject = document.createElement('input');
-        // inputRenameProject.type = "text";
-        // inputRenameProject.value = projectController.projectList[i].projectName;
-        // inputRenameProject.onclick = function() {this.select()};
-
-        // const submitRename = document.createElement('span');
-        // submitRename.setAttribute('class', 'fas fa-check');
-        // submitRename.classList.add('submit-rename-project');
-
-        // content.appendChild(modal);
-        // modal.appendChild(modalContent);
-        // modalContent.appendChild(closeModal);
-        // modalContent.appendChild(inputRenameProject);
-        // modalContent.appendChild(submitRename);
         const modal = document.getElementById('modal-rename-project')
         event.stopPropagation();
         modal.style.visibility = "visible";
@@ -172,11 +150,6 @@ class Render {
         const submitRename = document.getElementById('submit-rename-project')
 
         inputRenameProject.value = projectController.projectList[i].projectName;
-        // When the user clicks on the button, open the modal
-        editProjectBtn.onclick = function () {
-
-        }
-
         // When the user clicks on <span> (x), close the modal
         closeModal.onclick = function () {
             modal.style.visibility = "hidden";
@@ -192,6 +165,8 @@ class Render {
                 modal.style.visibility = "hidden";
                 modal.style.opacity = "0";
                 projectController.projectList[i].changeProjectName = nameProject;
+                Render.changeProjectNameDom(nameProject);
+
             }
         }
         //When user click input, autoselect text

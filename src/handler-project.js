@@ -20,6 +20,8 @@ class ProjectController {
         console.log("Removing project");
         this.projectList.splice(id, 1);
         Render.renderProjects();
+        Render.clearTasksDom();
+        Render.clearProjectNameTitle();
     }
 }
 

@@ -172,18 +172,6 @@ html, body {
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
 }
-.project .add-task{
-    cursor: pointer;
-    height: 20px;
-    line-height: 25px;
-    color: #1ec918;
-    transition-duration: 0.2s;
-}
-.project .add-task:hover{
-    color: #1b740f;
-    transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-}
 .project .edit-project-btn{
     cursor: pointer;
     height: 20px;
@@ -304,36 +292,71 @@ html, body {
 
 /*List tasks classes (being populated) */
 
-.grid-list-tasks{
-    display: grid;
-    flex-grow: 1;
-    padding: 25px;
-    overflow-y: auto;
-    grid-template-columns: repeat(6, minmax(calc(16% - 1rem), 1fr));
-    gap: 1em;
-}
-.grid-list-tasks-child{
-    background-color: rgba(0, 0, 0, 0.212);
-    height: 250px;
+.list-tasks{
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    padding: 25px;
+    gap: 1px;
     justify-content: flex-start;
+    align-items: center;
+}
+.list-tasks-child-add-task{
+    background-color: rgba(0, 0, 0, 0.212);
+    height: 50px;
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     padding: 12px;
     gap: 12px;
+    order: 0;
+    cursor: pointer;
+    transition: 0.5s;
+    color: whitesmoke;
 }
-.grid-list-tasks-content{
+.list-tasks-child-add-task:hover{
+    background-color:rgba(0, 0, 0, 0.17);
+    color: rgb(145, 145, 145);
+}
+.list-tasks-child{
+    background-color: rgba(0, 0, 0, 0.212);
+    height: 50px;
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    order: 2;
+}
+.list-tasks-child-create-template{
+    background-color: rgba(0, 0, 0, 0.212);
+    height: 250px;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    order: 1;
+}
+.list-tasks-content{
     flex-grow: 1;
 }
-.grid-list-tasks-child h3{
+.list-tasks h3{
     font-family: 'Roboto', sans-serif;
-    color: whitesmoke;
+
     font-weight: 500;
     font-size: 22px;
     padding: 0;
     margin: 0;
+    cursor: pointer;
 }
-.grid-list-tasks-child input,textarea{
+.list-tasks-child input,textarea, .list-tasks-child-create-template input,textarea{
     width: 95%;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
@@ -342,21 +365,71 @@ html, body {
     resize: none;
     border: 1px solid rgb(209, 209, 209)
 }
-.grid-list-tasks-child input:hover,textarea:hover{
+.list-tasks-child input:hover,textarea:hover, .list-tasks-child-create-template input:hover,textarea:hover{
     transition: border-color 0.3s ease-in-out;
     border: 1px solid rgb(136, 136, 136);
 }
-.grid-list-tasks-child input:focus,textarea:focus{
+.list-tasks-child input:focus,textarea:focus, .list-tasks-child-create-template input:focus,textarea:focus{
     outline: none;
     border: 1px solid rgb(34, 34, 34);
 }
-.grid-list-tasks-child span{
-    margin-top: 10px;
-    cursor: pointer;
+.list-tasks-child-create-template span{
     color: whitesmoke;
+    margin-top: 10px;
     font-size: 25px;
-    transition: 0.5s;
+    cursor: pointer;
+    transition-duration: 0.2s;
 }
-.grid-list-tasks-child span:hover{
-    color: rgb(173, 173, 173);
+.list-tasks-child-create-template span:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+}
+.list-tasks .add-task{
+    cursor: pointer;
+    height: 20px;
+}
+.task{
+    background-color: rgba(0, 0, 0, 0.212);
+    min-height: 50px;
+
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    order: 2;
+    color: whitesmoke;
+    animation: fadein 0.5s;
+    animation-fill-mode: forwards;
+}
+.task-general{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.task-details{
+    flex-direction:column;
+    background-color: rgba(0, 0, 0, 0.212);
+    width: 35%;
+    height: 100px;
+    display: none;
+}
+.task-details-show{
+    display: flex;
+    animation: fadein 0.5s;
+    animation-fill-mode: forwards;
+}
+.task-details-hide{
+    animation: fadeout 0.5s;
+    animation-fill-mode: forwards;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
