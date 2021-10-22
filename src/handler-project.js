@@ -23,6 +23,18 @@ class ProjectController {
         Render.clearTasksDom();
         Render.clearProjectNameTitle();
     }
+    removeTask(projectIndex, taskIndex) {
+        console.log("Removing task");
+        this.projectList[projectIndex].listTasks.splice(taskIndex, 1);
+        Render.renderProjects();
+        Render.renderTasks(projectIndex);
+    }
+    taskDone(projectIndex, taskIndex) {
+        console.log('Marking task as done');
+        this.projectList[projectIndex].listTasks[taskIndex].done = true
+        Render.renderTasks(projectIndex);
+        console.log(this.projectList)
+    }
 }
 
 const projectController = new ProjectController

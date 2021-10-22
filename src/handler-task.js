@@ -6,7 +6,7 @@ import { Render } from "./render";
 class TaskController {
     static createTaskDiv(showListTasks, i) {
         const createTask = document.createElement('div');
-        createTask.addEventListener('click', () => { Render.addTaskClicked(showListTasks, i) })
+        createTask.addEventListener('click', () => { Render.addTaskClicked(showListTasks, i) }, {once : true})
         createTask.classList.add('list-tasks-child-add-task');
 
 
@@ -41,7 +41,7 @@ class TaskController {
 
         const submitInfo = document.createElement('span');
         submitInfo.setAttribute('class', "fas fa-plus");
-        submitInfo.addEventListener('click', () => { this.getInfoInputs(inputNameTask, inputDescriptionTask, i) })
+        submitInfo.addEventListener('click', () => { this.getInfoInputs(inputNameTask, inputDescriptionTask, inputDate, i) })
         
         showListTasks.appendChild(divTemplate);
         divTemplate.appendChild(inputNameTask);
@@ -49,11 +49,12 @@ class TaskController {
         divTemplate.appendChild(inputDate);
         divTemplate.appendChild(submitInfo);
     }
-    static getInfoInputs(inputNameTask, inputDescriptionTask, i) {
+    static getInfoInputs(inputNameTask, inputDescriptionTask, inputDate, i) {
         const taskTitle = inputNameTask.value;
         const descriptionTask = inputDescriptionTask.value;
+        const dueDate = inputDate.value;
         console.log(`Task's title: ${taskTitle}, description task: ${descriptionTask}`)
-        projectController.projectList[i].createTask(taskTitle, descriptionTask);
+        projectController.projectList[i].createTask(taskTitle, descriptionTask, dueDate);
         Render.renderProjects();
         Render.renderTasks(i);
     }
@@ -61,15 +62,40 @@ class TaskController {
         const taskList = document.getElementById('show-list-tasks');
 
         const taskMain = document.createElement('div');
-        taskMain.classList.add('task');
+        if(projectController.projectList[i].listTasks[j].done == true){
+            console.log('true muahaha')
+            taskMain.classList.add('task');
+            taskMain.classList.add('task-done');
+        }else{
+            taskMain.classList.add('task');
+        }
+
         taskMain.id = j
-   
+        
         const taskResume = document.createElement('div');
-        taskResume.classList.add('task-general')
+        taskResume.classList.add('resume-task')
 
-        const titleTask = document.createElement('h3');
-        titleTask.textContent = projectController.projectList[i].listTasks[j].title;
+        const taskDone = document.createElement('div');
+        taskDone.classList.add('done-btn')
+        
+        const taskDoneBtn = document.createElement('button');
+        taskDoneBtn.addEventListener('click', () => {projectController.taskDone(i, j)}, {once : true})
+        // taskDoneBtn.addEventListener('click', () => {projectController.removeTask(i, j)})
+        const taskBtns = document.createElement('div');
+        taskBtns.classList.add('btns-task');
 
+        const taskTitle = document.createElement('div');
+        taskTitle.classList.add('title-task');
+
+        const taskTitleText = document.createElement('h3');
+        taskTitleText.textContent = projectController.projectList[i].listTasks[j].title;
+
+        const taskDate = document.createElement('div');
+        taskDate.classList.add('date-task');
+
+        const taskDateText = document.createElement('h3');
+        console.log(projectController.projectList[i].listTasks[j].dueDate)
+        taskDateText.textContent = projectController.projectList[i].listTasks[j].dueDate;
         //Creating hidden side
         const hiddenDiv = document.createElement('div');
         hiddenDiv.classList.add('task-details');
@@ -77,12 +103,23 @@ class TaskController {
         const descriptionTask = document.createElement('p');
         descriptionTask.textContent = projectController.projectList[i].listTasks[j].description;
         taskList.appendChild(taskMain);
-        taskMain.appendChild(taskResume);
-        taskMain.appendChild(hiddenDiv);
-        taskResume.appendChild(titleTask);
-        taskResume.appendChild(descriptionTask);
 
-        taskMain.addEventListener('click', () => {
+        taskMain.appendChild(taskResume);
+
+        taskResume.appendChild(taskDone)
+        taskResume.appendChild(taskTitle)
+        taskTitle.appendChild(taskTitleText);
+        taskResume.appendChild(taskTitle);
+        taskResume.appendChild(taskDate);
+        taskResume.appendChild(taskBtns);
+
+        taskDone.appendChild(taskDoneBtn);
+        taskDate.appendChild(taskDateText);
+        taskMain.appendChild(hiddenDiv);
+
+        hiddenDiv.appendChild(descriptionTask);
+
+        taskTitle.addEventListener('click', () => {
             if(hiddenDiv.classList.contains('task-details-show')){
                 setTimeout(() => {console.log('huh');hiddenDiv.classList.remove('task-details-show'), 55500})    
                 hiddenDiv.classList.add('task-details-hide')

@@ -354,7 +354,6 @@ html, body {
     font-size: 22px;
     padding: 0;
     margin: 0;
-    cursor: pointer;
 }
 .list-tasks-child input,textarea, .list-tasks-child-create-template input,textarea{
     width: 95%;
@@ -391,17 +390,62 @@ html, body {
 .task{
     background-color: rgba(0, 0, 0, 0.212);
     min-height: 50px;
-
     width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 12px;
     order: 2;
     color: whitesmoke;
-    animation: fadein 0.5s;
-    animation-fill-mode: forwards;
+}
+.task.task-done{
+    text-decoration:line-through;
+}
+.task.task-done button{
+    background-color: rgba(32, 32, 32, 0.692) !important;
+}
+.task h3{
+    font-size: 18px;
+    font-weight: 300;
+    padding: 5px;
+}
+.task .resume-task{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 50px;
+    margin-top: 5px;
+}
+.task .done-btn{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.task .done-btn button{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color:rgba(32, 32, 32, 0);
+    border: 1px solid rgb(158, 158, 158);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.task .done-btn button:hover{
+    transform: scale(1.1);
+    background-color: rgba(32, 32, 32, 0.295)
+}
+.task .title-task{
+    width: 55%;
+    cursor: pointer;
+}
+.task .date-task{
+    width: 25%;
+    cursor: default;
+}
+.task .btns-task{
+    width: 10%;
+    background-color: white;
 }
 .task-general{
     display: flex;
@@ -409,15 +453,17 @@ html, body {
     justify-content: space-evenly;
     align-items: center;
 }
+
 .task-details{
     flex-direction:column;
-    background-color: rgba(0, 0, 0, 0.212);
-    width: 35%;
+    width: 100%;
     height: 100px;
     display: none;
 }
 .task-details-show{
     display: flex;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
     animation: fadein 0.5s;
     animation-fill-mode: forwards;
 }
