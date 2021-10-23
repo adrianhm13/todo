@@ -79,10 +79,16 @@ class TaskController {
         taskDone.classList.add('done-btn')
         
         const taskDoneBtn = document.createElement('button');
-        taskDoneBtn.addEventListener('click', () => {projectController.taskDone(i, j)}, {once : true})
-        // taskDoneBtn.addEventListener('click', () => {projectController.removeTask(i, j)})
+
         const taskBtns = document.createElement('div');
         taskBtns.classList.add('btns-task');
+
+        const editTask = document.createElement('span');
+        editTask.setAttribute('class', 'far fa-edit');
+
+        const deleteTask = document.createElement('span');
+        deleteTask.setAttribute('class', 'fas fa-trash');
+        deleteTask.addEventListener('click', () => {projectController.removeTask(i, j)});
 
         const taskTitle = document.createElement('div');
         taskTitle.classList.add('title-task');
@@ -113,12 +119,17 @@ class TaskController {
         taskResume.appendChild(taskDate);
         taskResume.appendChild(taskBtns);
 
+        taskBtns.appendChild(editTask);
+        taskBtns.appendChild(deleteTask);
+
         taskDone.appendChild(taskDoneBtn);
         taskDate.appendChild(taskDateText);
         taskMain.appendChild(hiddenDiv);
 
         hiddenDiv.appendChild(descriptionTask);
 
+        taskDoneBtn.addEventListener('click', () => {projectController.taskDone(i, j)}, {once : true});
+        editTask.addEventListener('click', () => {this.editTask(i, j, hiddenDiv)});
         taskTitle.addEventListener('click', () => {
             if(hiddenDiv.classList.contains('task-details-show')){
                 setTimeout(() => {console.log('huh');hiddenDiv.classList.remove('task-details-show'), 55500})    
@@ -127,6 +138,9 @@ class TaskController {
                 hiddenDiv.classList.add('task-details-show')
                 hiddenDiv.classList.remove('task-details-hide')
             }})
+    }
+    static editTask (projectIndex, taskIndex, description){
+        
     }
 }
 
