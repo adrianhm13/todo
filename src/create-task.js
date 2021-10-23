@@ -20,8 +20,25 @@ export class addTask {
     set changeTitle(newTitle) {
         this.title = newTitle;
     }
-    set changeDescription(newDescription) {
-        this.description = newDescription;
+    
+    // set changeDescription(newDescription) {
+    //     this.description = newDescription;
+    // }
+
+    set changeTitle(title){
+        this.title = title
+    }
+    set changeDueDate(dueDate){
+        this.dueDate = dueDate
+    }
+    set changeDescription(description){
+        this.description = description;
+    }
+
+    changeInfoTask(title, description, dueDate) {
+        this.changeTitle = title
+        this.changeDueDate = dueDate
+        this.changeDescription = description
     }
 
 }

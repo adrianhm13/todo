@@ -49,8 +49,14 @@ class Render {
         const nameProject = inputNameProject.value
         inputNameProject.value = "New project's name";
 
-        if (Render.checkDuplicateNameProject(nameProject) == true || nameProject == false) {
-            alert("This name it's being used, or it's empty");
+        if (Render.checkDuplicateNameProject(nameProject) == true || nameProject == false || nameProject.length > 18) {
+            if (nameProject == false){
+                alert(`The project's title can't be empty`);
+            }else if (nameProject.length > 18){
+                alert(`The name of the project it's too long`);
+            }else{
+                alert(`The name of the project already exists`);
+            }
         } else {
             const project = new Project(nameProject);
         }

@@ -6,7 +6,7 @@ import { Render } from "./render";
 class TaskController {
     static createTaskDiv(showListTasks, i) {
         const createTask = document.createElement('div');
-        createTask.addEventListener('click', () => { Render.addTaskClicked(showListTasks, i) }, {once : true})
+        createTask.addEventListener('click', () => { Render.addTaskClicked(showListTasks, i) }, { once: true })
         createTask.classList.add('list-tasks-child-add-task');
 
 
@@ -42,7 +42,7 @@ class TaskController {
         const submitInfo = document.createElement('span');
         submitInfo.setAttribute('class', "fas fa-plus");
         submitInfo.addEventListener('click', () => { this.getInfoInputs(inputNameTask, inputDescriptionTask, inputDate, i) })
-        
+
         showListTasks.appendChild(divTemplate);
         divTemplate.appendChild(inputNameTask);
         divTemplate.appendChild(inputDescriptionTask);
@@ -62,22 +62,22 @@ class TaskController {
         const taskList = document.getElementById('show-list-tasks');
 
         const taskMain = document.createElement('div');
-        if(projectController.projectList[i].listTasks[j].done == true){
+        if (projectController.projectList[i].listTasks[j].done == true) {
             console.log('true muahaha')
             taskMain.classList.add('task');
             taskMain.classList.add('task-done');
-        }else{
+        } else {
             taskMain.classList.add('task');
         }
 
         taskMain.id = j
-        
+
         const taskResume = document.createElement('div');
         taskResume.classList.add('resume-task')
 
         const taskDone = document.createElement('div');
         taskDone.classList.add('done-btn')
-        
+
         const taskDoneBtn = document.createElement('button');
 
         const taskBtns = document.createElement('div');
@@ -88,7 +88,6 @@ class TaskController {
 
         const deleteTask = document.createElement('span');
         deleteTask.setAttribute('class', 'fas fa-trash');
-        deleteTask.addEventListener('click', () => {projectController.removeTask(i, j)});
 
         const taskTitle = document.createElement('div');
         taskTitle.classList.add('title-task');
@@ -128,19 +127,59 @@ class TaskController {
 
         hiddenDiv.appendChild(descriptionTask);
 
-        taskDoneBtn.addEventListener('click', () => {projectController.taskDone(i, j)}, {once : true});
-        editTask.addEventListener('click', () => {this.editTask(i, j, hiddenDiv)});
+        taskDoneBtn.addEventListener('click', () => { projectController.taskDone(i, j) }, { once: true });
+        if (projectController.projectList[i].listTasks[j].done == false){
+            editTask.addEventListener('click', () => { this.editTask(i, j, hiddenDiv, taskTitle, taskDate, descriptionTask) }, {once: true});
+        }
+        deleteTask.addEventListener('click', () => { projectController.removeTask(i, j) });
         taskTitle.addEventListener('click', () => {
-            if(hiddenDiv.classList.contains('task-details-show')){
-                setTimeout(() => {console.log('huh');hiddenDiv.classList.remove('task-details-show'), 55500})    
+            if (hiddenDiv.classList.contains('task-details-show')) {
+                hiddenDiv.classList.remove('task-details-show')
                 hiddenDiv.classList.add('task-details-hide')
-            }else{
+            } else {
                 hiddenDiv.classList.add('task-details-show')
                 hiddenDiv.classList.remove('task-details-hide')
-            }})
+            }
+        });
+
     }
-    static editTask (projectIndex, taskIndex, description){
+    static editTask(projectIndex, taskIndex, hiddenDesc, taskTitle, taskDate, description) {
+        hiddenDesc.classList.add('task-details-show');
+        hiddenDesc.classList.remove('task-details-hide');
         
+        const inputRenameTitle = document.createElement('input');
+        inputRenameTitle.type = "text";
+        inputRenameTitle.value = projectController.projectList[projectIndex].listTasks[taskIndex].title;
+
+        const inputChangeDate = document.createElement('input');
+        inputChangeDate.type = "date";
+        inputChangeDate.value = projectController.projectList[projectIndex].listTasks[taskIndex].dueDate;
+        inputChangeDate.classList.add('change-date');
+
+        const inputChangeDescription = document.createElement('textarea');
+        inputChangeDescription.value = projectController.projectList[projectIndex].listTasks[taskIndex].description;
+
+        const submitInfo = document.createElement('span');
+        submitInfo.setAttribute('class', 'fas fa-check');
+
+        taskTitle.parentNode.replaceChild(inputRenameTitle, taskTitle);
+        taskDate.parentNode.replaceChild(inputChangeDate, taskDate);
+        description.parentNode.replaceChild(inputChangeDescription, description);
+
+        hiddenDesc.appendChild(submitInfo);
+
+        inputRenameTitle.addEventListener('click', function() {this.select()})
+        inputChangeDescription.addEventListener('click', function() {this.select()})
+
+        submitInfo.addEventListener('click', () => {this.getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex) })
+    }
+    static getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex){
+        const renameTitle = inputRenameTitle.value;
+        const renameDescription = inputChangeDescription.value;
+        const renameDate = inputChangeDate.value;
+        projectController.projectList[projectIndex].listTasks[taskIndex].changeInfoTask(renameTitle, renameDescription, renameDate);
+        console.log(projectController.projectList[projectIndex].listTasks[taskIndex])
+        Render.renderTasks(taskIndex);
     }
 }
 
