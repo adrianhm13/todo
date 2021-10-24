@@ -125,9 +125,7 @@ class TaskController {
         hiddenDiv.appendChild(descriptionTask);
 
         taskDoneBtn.addEventListener('click', () => { projectController.taskDone(i, j) }, { once: true });
-        if (projectController.projectList[i].listTasks[j].done == false){
-            editTask.addEventListener('click', () => { this.editTask(i, j, hiddenDiv, taskTitle, taskDate, descriptionTask) }, {once: true});
-        }
+        editTask.addEventListener('click', () => { console.log('hah'); this.editTask(i, j, hiddenDiv, taskTitle, taskDate, descriptionTask) }, { once: true });
         deleteTask.addEventListener('click', () => { projectController.removeTask(i, j) });
         taskTitle.addEventListener('click', () => {
             if (hiddenDiv.classList.contains('task-details-show')) {
@@ -143,7 +141,7 @@ class TaskController {
     static editTask(projectIndex, taskIndex, hiddenDesc, taskTitle, taskDate, description) {
         hiddenDesc.classList.add('task-details-show');
         hiddenDesc.classList.remove('task-details-hide');
-        
+
         const inputRenameTitle = document.createElement('input');
         inputRenameTitle.type = "text";
         inputRenameTitle.value = projectController.projectList[projectIndex].listTasks[taskIndex].title;
@@ -165,17 +163,18 @@ class TaskController {
 
         hiddenDesc.appendChild(submitInfo);
 
-        inputRenameTitle.addEventListener('click', function() {this.select()})
-        inputChangeDescription.addEventListener('click', function() {this.select()})
+        inputRenameTitle.addEventListener('click', function () { this.select() })
+        inputChangeDescription.addEventListener('click', function () { this.select() })
 
-        submitInfo.addEventListener('click', () => {this.getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex) })
+        submitInfo.addEventListener('click', () => { this.getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex) })
     }
-    static getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex){
+    static getInfoChange(inputRenameTitle, inputChangeDescription, inputChangeDate, taskIndex, projectIndex) {
         const renameTitle = inputRenameTitle.value;
         const renameDescription = inputChangeDescription.value;
         const renameDate = inputChangeDate.value;
         projectController.projectList[projectIndex].listTasks[taskIndex].changeInfoTask(renameTitle, renameDescription, renameDate);
-        Render.renderTasks(taskIndex);
+        console.log(projectController.projectList[projectIndex].listTasks[taskIndex])
+        Render.renderTasks(projectIndex);
     }
 }
 

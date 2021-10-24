@@ -3,7 +3,7 @@ import {events} from './pubsub.js';
 import { Render } from './render.js';
 
 export class addTask {
-    constructor(title, description, dueDate, done){
+    constructor(title, description, dueDate, done = false){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
