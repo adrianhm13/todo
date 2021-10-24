@@ -3,12 +3,11 @@ import {events} from './pubsub.js';
 import { Render } from './render.js';
 
 export class addTask {
-    constructor(title, description, dueDate, priority){
+    constructor(title, description, dueDate, done){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
-        this.done = false;
+        this.done = done;
     }
     get infoTask() {
         console.log(`${this.title} it's a task with the description: ${this.description} with a due date of: ${this.dueDate}, with a ${this.priority}`)

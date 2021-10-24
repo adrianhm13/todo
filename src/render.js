@@ -1,20 +1,22 @@
 import { Project } from "./create-project";
 import { projectController } from "./handler-project";
 import { TaskController } from "./handler-task";
+import { Storage } from "./storage";
 
 class Render {
     static renderProjects() {
 
         const projectList = this.projectList
-        console.log(this.projectList);
         this.clearProjectsDOM()
 
         for (let i = 0; i < projectList.length; i++) {
             this.populateListProject(i);
         }
+        Storage.saveProject()
     }
     static renderTasks(i) {
         this.populateSingleProjectContent(i);
+        Storage.saveProject()
     }
     static clearProjectsDOM() {
         const titleProject = document.getElementById('title-project-task');
@@ -39,7 +41,6 @@ class Render {
         return projectList
     }
     static getButtons() {
-        console.log('Getting buttons and inputs');
 
         const btnAddProject = document.getElementById('addProject');
         btnAddProject.addEventListener('click', this.getInfoNewProject)

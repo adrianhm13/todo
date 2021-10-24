@@ -53,7 +53,6 @@ class TaskController {
         const taskTitle = inputNameTask.value;
         const descriptionTask = inputDescriptionTask.value;
         const dueDate = inputDate.value;
-        console.log(`Task's title: ${taskTitle}, description task: ${descriptionTask}`)
         projectController.projectList[i].createTask(taskTitle, descriptionTask, dueDate);
         Render.renderProjects();
         Render.renderTasks(i);
@@ -63,7 +62,6 @@ class TaskController {
 
         const taskMain = document.createElement('div');
         if (projectController.projectList[i].listTasks[j].done == true) {
-            console.log('true muahaha')
             taskMain.classList.add('task');
             taskMain.classList.add('task-done');
         } else {
@@ -99,7 +97,6 @@ class TaskController {
         taskDate.classList.add('date-task');
 
         const taskDateText = document.createElement('h3');
-        console.log(projectController.projectList[i].listTasks[j].dueDate)
         taskDateText.textContent = projectController.projectList[i].listTasks[j].dueDate;
         //Creating hidden side
         const hiddenDiv = document.createElement('div');
@@ -178,7 +175,6 @@ class TaskController {
         const renameDescription = inputChangeDescription.value;
         const renameDate = inputChangeDate.value;
         projectController.projectList[projectIndex].listTasks[taskIndex].changeInfoTask(renameTitle, renameDescription, renameDate);
-        console.log(projectController.projectList[projectIndex].listTasks[taskIndex])
         Render.renderTasks(taskIndex);
     }
 }

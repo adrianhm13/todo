@@ -10,8 +10,6 @@ class Project {
         console.log(this.infoProject)
     }
     createTask(title, description, dueDate, priority, project){
-        event.stopPropagation();
-        console.log("ahae")
         let task = new addTask(title, description, dueDate, priority, project)
         this.listTasks.push(task);
     }

@@ -1,6 +1,6 @@
 import { Project } from './create-project.js'
 import { Render } from './render.js'
-
+import { Storage } from './storage.js'
 //Class to handle projects
 
 class ProjectController {
@@ -9,11 +9,12 @@ class ProjectController {
     }
     get infoProjectList(){return this.projectList}
 
+
     addProject = (Project) => {
         console.log("Project added to controller")
         this.projectList.push(Project)
         Render.renderProjects();
-        console.log(`"Array with all the projects: " + ${JSON.stringify(this.projectList)}`);
+        Storage.saveProject();
     }
     removeProject = (id) => {
         event.stopPropagation();
@@ -38,5 +39,6 @@ class ProjectController {
 }
 
 const projectController = new ProjectController
+console.log(projectController);
 
 export { projectController }
